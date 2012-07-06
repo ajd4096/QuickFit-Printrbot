@@ -262,17 +262,10 @@ module QFcarriage() {
 //
 // This is oriented as fitted, with the top-rear edge on the X-axis.
 //
-// This is the "pretty" version with bevelled corners etc
+// This is the "pretty" version.
 
 module QFbracket1() {
 	base		= base_plate;
-	bevel1		= [(base[0] - 48)/2, 5];
-	bevel2		= bevel1;
-
-	bevel_rear_left		= [[+base[0]/2 +mo, -mo], [+base[0]/2 -bevel1[0], -mo], [+base[0]/2 +mo, bevel1[1]]];
-	bevel_rear_right	= [[-base[0]/2 -mo, -mo], [-base[0]/2 +bevel1[0], -mo], [-base[0]/2 -mo, bevel1[1]]];
-	bevel_front_left	= [[-base[0]/2 -mo, base[1] +mo], [-base[0]/2+bevel2[0], base[1] +mo], [-base[0]/2 -mo, base[1] -bevel2[1]]];
-	bevel_front_right	= [[+base[0]/2 +mo, base[1] +mo], [+base[0]/2-bevel2[0], base[1] +mo], [+base[0]/2 +mo, base[1] -bevel2[1]]];
 
 	// main vertical plate clamped against carriage
 	// outer edge is flat
@@ -322,15 +315,6 @@ module QFbracket1() {
 			}
 		}
 
-		// Remove the corner bevels
-		translate([0, 0, -base[2] -mo]) linear_extrude(height=(base[2] +mo*2), convexity=5) {
-			polygon(bevel_rear_left);
-			polygon(bevel_rear_right);
-			polygon(bevel_front_left);
-			polygon(bevel_front_right);
-		}
-	
-
 		// vertical holes for clamps
 		translate(extruder_offset)
 		for (X = clamp_holes_x) for (Y = clamp_holes_y) {
@@ -365,7 +349,7 @@ module QFbracket1() {
 //
 // This is oriented as fitted, with the top-rear edge on the X-axis.
 //
-// This is the "ugly" version with bevelled corners etc
+// This is the "ugly" version with lots of mounting holes.
 
 module QFbracket2() {
 
