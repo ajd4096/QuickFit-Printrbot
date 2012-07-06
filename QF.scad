@@ -238,7 +238,7 @@ module QFcarriage(printable=0) {
 //**************************************************
 // QFbracket1
 //
-// Extruder mounting bracker for Printrbot
+// Extruder mounting bracket for Printrbot
 //
 // This is oriented as fitted, with the top-rear edge on the X-axis.
 //
@@ -345,7 +345,7 @@ module QFbracket1(printable=0) {
 //**************************************************
 // QFbracket2
 //
-// Extruder mounting bracker for Printrbot
+// Extruder mounting bracket for Printrbot
 //
 // This is oriented as fitted, with the top-rear edge on the X-axis.
 //
