@@ -54,7 +54,9 @@ clamp_clearance_z1	= +0.0;		// Z-clearance on inner edge
 clamp_clearance_z2	= +1.5;		// Z-clearance on outer edge
 clamp_clearance_z3	= +2;		// Z-clearance under movable clamp legs
 
-carriage_holes_x	= [-15, 0, 15];		// 3 holes on 15mm spacing - the center hole is compatible with the PB carriage/bracket
+// 3 holes on 15mm spacing - the center hole is compatible with the PB carriage/bracket
+carriage_hole_spacing	= 15;
+carriage_holes_x	= [-carriage_hole_spacing, 0, carriage_hole_spacing];
 carriage_holes_z	= [-5.600, -25.457];	// from PB files
 carriage_hole_d		= 4.5;
 carriage_nut_d		= 8;
@@ -377,6 +379,12 @@ module QFbracket2(printable=0) {
 
 			// vertical mounting plate
 			translate([-rear_plate[0]/2, 0, -rear_plate[2]]) cube(rear_plate);
+
+			// vertical ribs
+			for (M=[[0, 0, 0], [1, 0, 0]]) mirror(M) {
+				translate([carriage_hole_spacing*0.5 - 4/2, rear_plate[1] -mo, -rear_plate[2]]) cube([4, 2, rear_plate[2]]);
+				translate([carriage_hole_spacing*1.5 - 4/2, rear_plate[1] -mo, -rear_plate[2]]) cube([4, 2, rear_plate[2]]);
+			}
 
 			// add side plates
 			for (M=[[0, 0, 0], [1, 0, 0]]) mirror(M) {
