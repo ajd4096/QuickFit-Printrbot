@@ -44,7 +44,9 @@ extruder_offset	= [0, 30, 0];
 
 extruder_clamp	= [10, base_plate[1], extruder_size[2] + 5];
 
-clamp_hole_offset = base_plate[1]/2 - 5;
+// Set the clamp hole spacing, relative to the center of the base plate.
+clamp_holes_x		= [50, -50];
+clamp_holes_y		= [25, -25];
 clamp_hole_d	= 4.5;
 clamp_nut_d	= 8;
 clamp_nut_h	= 2;
@@ -329,15 +331,13 @@ module QFbracket1(printable=0) {
 
 		// vertical holes for clamps
 		translate(extruder_offset)
-		for (X = [extruder_size[0]/2, -extruder_size[0]/2]) {
-			for (Y = [clamp_hole_offset, -clamp_hole_offset]) {
-				translate([X, Y, -base[2] -mo])
-					rotate([0, 0, 180/6])
-					#cylinder(r=clamp_hole_d * da6, h=base[2] + mo*2, $fn=6);
-				translate([X, Y, -base[2] -mo])
-					rotate([0, 0, 180/6])
-					#cylinder(r=clamp_nut_d * da6, h=clamp_nut_h +mo, $fn=6);
-			}
+		for (X = clamp_holes_x) for (Y = clamp_holes_y) {
+			translate([X, Y, -base[2] -mo])
+				rotate([0, 0, 180/6])
+				#cylinder(r=clamp_hole_d * da6, h=base[2] + mo*2, $fn=6);
+			translate([X, Y, -base[2] -mo])
+				rotate([0, 0, 180/6])
+				#cylinder(r=clamp_nut_d * da6, h=clamp_nut_h +mo, $fn=6);
 		}
 
 		// bracket-carriage mounting holes
@@ -427,15 +427,13 @@ module QFbracket2(printable=0) {
 
 		// vertical holes for clamps
 		translate(extruder_offset)
-		for (X = [extruder_size[0]/2, -extruder_size[0]/2]) {
-			for (Y = [clamp_hole_offset, -clamp_hole_offset]) {
-				translate([X, Y, -base_plate[2] -mo])
-					rotate([0, 0, 180/6])
-					cylinder(r=clamp_hole_d * da6, h=base_plate[2] + mo*2, $fn=6);
-				translate([X, Y, -base_plate[2] -mo])
-					rotate([0, 0, 180/6])
-					cylinder(r=clamp_nut_d * da6, h=clamp_nut_h +mo, $fn=6);
-			}
+		for (X = clamp_holes_x) for (Y = clamp_holes_y) {
+			translate([X, Y, -base_plate[2] -mo])
+				rotate([0, 0, 180/6])
+				cylinder(r=clamp_hole_d * da6, h=base_plate[2] + mo*2, $fn=6);
+			translate([X, Y, -base_plate[2] -mo])
+				rotate([0, 0, 180/6])
+				cylinder(r=clamp_nut_d * da6, h=clamp_nut_h +mo, $fn=6);
 		}
 
 		// bracket-carriage mounting holes
@@ -570,10 +568,11 @@ module	QFextruderClampLeft(printable=0) {
 
 
 		// remove holes for clamps
-		for (m=[[0, 0, 0], [0, 1, 0]]) mirror(m)
-			translate([0, clamp_hole_offset, -mo])
+		for (Y = clamp_holes_y) {
+			translate([0, Y, -mo])
 				rotate([0, 0, 180/6])
 				cylinder(r=clamp_hole_d * da6, h=block[2] +5 +mo*2, $fn=6);
+		}
 	}
 }
 
@@ -602,11 +601,11 @@ module	QFextruderClampRight(printable=0) {
 		}
 
 		// remove holes for clamps
-		for (m=[[0, 0, 0], [0, 1, 0]]) mirror(m) {
-			translate([0, clamp_hole_offset, -mo])
+		for (Y = clamp_holes_y) {
+			translate([0, Y, -mo])
 				rotate([0, 0, 180/6])
 				cylinder(r=clamp_hole_d *da6, h=block[2] +mo*2, $fn=6);
-			*translate([0, clamp_hole_offset, block[2] -clamp_nut_h])
+			*translate([0, Y, block[2] -clamp_nut_h])
 				rotate([0, 0, 180/6])
 				cylinder(r=clamp_nut_d *da6, h=clamp_nut_h +mo, $fn=6);
 		}
