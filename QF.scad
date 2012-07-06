@@ -608,9 +608,9 @@ module	show_assembly(exploded=0, bracket=1) {
 		QFcarriage();
 
 	if (bracket == 1)
-		QFbracket1(printable);
+		QFbracket1();
 	else if (bracket == 2)
-		QFbracket2(printable);
+		QFbracket2();
 
 	translate(exploded ? [0, 0, gap] : [0, 0, 0])
 		translate(extruder_offset) QFextruderAdapter1();
