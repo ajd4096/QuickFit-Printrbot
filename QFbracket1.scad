@@ -1,3 +1,3 @@
 include <QF.scad>
 
-QFbracket1(printable=1);
+!QFbracket1();

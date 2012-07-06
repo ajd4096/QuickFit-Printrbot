@@ -1,3 +1,3 @@
 include <QF.scad>
 
-QFextruderClamps(printable=1);
+!QFextruderClamps();
