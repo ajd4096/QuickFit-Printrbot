@@ -49,7 +49,7 @@ clamp_holes_x		= [50, -50];
 clamp_holes_y		= [25, -25];
 clamp_hole_d	= 4.5;
 clamp_nut_d	= 8;
-clamp_nut_h	= 2;
+clamp_nut_h	= 1;
 clamp_clearance_y1	= 0.5;		// Y-clearance on EACH side of inner edge
 clamp_clearance_y2	= 1.5;		// Y-clearance on EACH side of outer edge
 clamp_clearance_z1	= +0.0;		// Z-clearance on inner edge
@@ -605,7 +605,7 @@ module	QFextruderClampRight(printable=0) {
 			translate([0, Y, -mo])
 				rotate([0, 0, 180/6])
 				cylinder(r=clamp_hole_d *da6, h=block[2] +mo*2, $fn=6);
-			*translate([0, Y, block[2] -clamp_nut_h])
+			translate([0, Y, block[2] -clamp_nut_h])
 				rotate([0, 0, 180/6])
 				cylinder(r=clamp_nut_d *da6, h=clamp_nut_h +mo, $fn=6);
 		}
