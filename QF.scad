@@ -25,6 +25,8 @@
 // OpenSCAD Y +ve is towards the front of the Printrbot.
 // OpenSCAD Z +ve is towards the top of the Printrbot.
 
+// printable - set to 1 from the command-line
+printable	= 0;
 
 // mo = manifold overlap
 // this is a small overlap used to force the model to be manifold
@@ -120,7 +122,7 @@ module	QFlocatingGroove(X, Y) {
 // This is modelled as fitted, with the top-front edge on the X-axis.
 //
 
-module QFcarriage(printable=0) {
+module QFcarriage() {
 
 	block_size		= [48, 25, 32];	// ajd - make wider to seperate the groove from the bearing
 
@@ -262,7 +264,7 @@ module QFcarriage(printable=0) {
 //
 // This is the "pretty" version with bevelled corners etc
 
-module QFbracket1(printable=0) {
+module QFbracket1() {
 	base		= base_plate;
 	bevel1		= [(base[0] - 48)/2, 5];
 	bevel2		= bevel1;
@@ -365,7 +367,7 @@ module QFbracket1(printable=0) {
 //
 // This is the "ugly" version with bevelled corners etc
 
-module QFbracket2(printable=0) {
+module QFbracket2() {
 
 
 	rotate(printable ? [0, 180, 0] : [0, 0, 0])
@@ -534,9 +536,9 @@ module	QFextruderAdapter2() {
 //	Clamps for the extruder.
 //	This is modeled centered on X & Y, move it into place.
 
-module	QFextruderClamps(printable=0) {
-	QFextruderClampLeft(printable);
-	QFextruderClampRight(printable);
+module	QFextruderClamps() {
+	QFextruderClampLeft();
+	QFextruderClampRight();
 }
 	
 //**************************************************
@@ -545,7 +547,7 @@ module	QFextruderClamps(printable=0) {
 //	Left clamp for the extruder.
 //	This is modeled centered on X & Y, move it into place.
 
-module	QFextruderClampLeft(printable=0) {
+module	QFextruderClampLeft() {
 
 	block	= extruder_clamp;
 
@@ -582,7 +584,7 @@ module	QFextruderClampLeft(printable=0) {
 //	Right clamp for the extruder.
 //	This is modeled centered on X & Y, move it into place.
 
-module	QFextruderClampRight(printable=0) {
+module	QFextruderClampRight() {
 
 	block	= extruder_clamp;
 
@@ -639,11 +641,13 @@ module	show_assembly(exploded=0, bracket=1) {
 }
 
 
-show_assembly(exploded=1, bracket=2);
-//show_assembly(exploded=0, bracket=2);
-//QFcarriage(printable=1);
-//QFbracket1(printable=1);
-//QFbracket2(printable=1);
-//QFextruderClamps(printable=1);
-//QFextruderAdapter1(printable=1);
-//QFextruderAdapter2(printable=1);
+if (printable == 0) {
+	show_assembly(exploded=1, bracket=2);
+	//show_assembly(exploded=0, bracket=2);
+}
+//QFcarriage();
+//QFbracket1();
+//QFbracket2();
+//QFextruderClamps();
+//QFextruderAdapter1();
+//QFextruderAdapter2();

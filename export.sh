@@ -5,8 +5,8 @@ for  X in QFcarriage QFbracket1 QFbracket2 QFextruderClamps QFextruderAdapter1 Q
 	cat >$X.scad <<EOF
 include <QF.scad>
 
-${X}(printable=1);
+!${X}();
 EOF
 
-	openscad -o $X.stl $X.scad 2>/dev/null
+	openscad -o $X.stl -D printable=1 $X.scad 2>/dev/null
 done
