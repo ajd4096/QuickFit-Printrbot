@@ -122,7 +122,7 @@ module	QFlocatingGroove(X, Y) {
 // This is modelled as fitted, with the top-front edge on the X-axis.
 //
 
-module QFcarriage() {
+module QFcarriage() {	// make me
 
 	block_size		= [48, 25, 32];	// ajd - make wider to seperate the groove from the bearing
 
@@ -264,7 +264,7 @@ module QFcarriage() {
 //
 // This is the "pretty" version.
 
-module QFbracket1() {
+module QFbracket1() {	// make me
 	base		= base_plate;
 
 	// main vertical plate clamped against carriage
@@ -351,7 +351,7 @@ module QFbracket1() {
 //
 // This is the "ugly" version with lots of mounting holes.
 
-module QFbracket2() {
+module QFbracket2() {	// make me
 
 
 	rotate(printable ? [0, 180, 0] : [0, 0, 0])
@@ -483,7 +483,7 @@ module	QFextruderAdapter(adapter=0) {
 //
 //	This is modeled centered on X & Y, move it into place for assembly view.
 
-module	QFextruderAdapter1() {
+module	QFextruderAdapter1() {	// make me
 	difference() {
 		QFextruderAdapter();
 
@@ -501,7 +501,7 @@ module	QFextruderAdapter1() {
 //
 //	This is modeled centered on X & Y, move it into place for assembly view.
 
-module	QFextruderAdapter2() {
+module	QFextruderAdapter2() {	// make me
 	difference() {
 		QFextruderAdapter();
 
@@ -520,7 +520,7 @@ module	QFextruderAdapter2() {
 //	Clamps for the extruder.
 //	This is modeled centered on X & Y, move it into place.
 
-module	QFextruderClamps() {
+module	QFextruderClamps() {	// make me
 	QFextruderClampLeft();
 	QFextruderClampRight();
 }
