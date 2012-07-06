@@ -42,9 +42,9 @@ base_plate	= [110, 60, 5];
 extruder_size	= [100, 28, 5];		// from RichRap's files, Z + 0.5 at the ends
 extruder_offset	= [0, 30, 0];
 
-extruder_clamp	= [10, extruder_size[1] +20, extruder_size[2] + 5];
+extruder_clamp	= [10, base_plate[1], extruder_size[2] + 5];
 
-clamp_hole_offset = extruder_size[1]/2 + 5;
+clamp_hole_offset = base_plate[1]/2 - 5;
 clamp_hole_d	= 4.5;
 clamp_nut_d	= 8;
 clamp_nut_h	= 2;
