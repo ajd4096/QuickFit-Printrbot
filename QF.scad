@@ -64,7 +64,8 @@ carriage_nut_h2		= 4;			// nut trap in bracket base
 // locating lug, dimensions from PB files
 groove_zo	= 8.7;
 groove_z	= 7.8;
-groove_y	= 1;
+groove_y1	= 1.5;		// groove is deeper than the lug
+groove_y2	= 1;
 
 
 //**************************************************
@@ -90,6 +91,22 @@ front_hole_d		= 4.5;
 front_nut_d		= 8;
 front_nut_h		= 1;
 
+
+//**************************************************
+//	QFlocatingGroove
+//
+//	Draw the locating groove/lug in place
+
+module	QFlocatingGroove(X, Y) {
+
+	Z	= groove_z;
+	ZO	= groove_zo;
+
+	translate([-X/2 -mo, -Y, -Z -ZO])
+		rotate([0, 90, 0])
+		linear_extrude(height=X +mo*2, convexity=2)
+		polygon([[0, 0], [0, Y +mo], [-Z, Y+mo], [-Z +Y, 0]]);
+}
 
 //**************************************************
 // QFcarriage
@@ -227,10 +244,7 @@ module QFcarriage(printable=0) {
 		translate(belt_offset2) cube(belt);
 
 		// locating groove
-		translate([-block_size[0]/2 -mo, -groove_y, -groove_zo -groove_z])
-			rotate([0, 90, 0])
-			linear_extrude(height=block_size[0] +mo*2, convexity=2)
-			polygon([[0, 0], [0, groove_y +mo], [-groove_z, groove_y+mo], [-groove_z +groove_y, 0]]);
+		QFlocatingGroove(X=block_size[0], Y=groove_y1);
 	}
 }
 
@@ -267,10 +281,8 @@ module QFbracket1(printable=0) {
 			// main outline
 			translate([-base[0]/2, 0, -base[2]]) cube(base);
 
-			// locating lug
-			translate([-plate1[0]/2 -mo, -groove_y, -groove_zo]) rotate([0, 90, 0]) 
-			linear_extrude(height=plate1[0] +mo*2, convexity=2)
-				polygon([[groove_y, 0], [groove_z, 0], [groove_z, groove_y +mo], [0, groove_y +mo]]);
+			// add locating lug
+			QFlocatingGroove(X=plate1[0], Y=groove_y2);
 
 			// vertical mounting plate
 			hull() {
@@ -361,9 +373,7 @@ module QFbracket2(printable=0) {
 			translate([-base_plate[0]/2, 0, -base_plate[2]]) cube(base_plate);
 
 			// add locating lug
-			translate([-rear_plate[0]/2, -groove_y, -groove_zo]) rotate([0, 90, 0]) 
-			linear_extrude(height=rear_plate[0] +mo*2, convexity=2)
-				polygon([[groove_y, 0], [groove_z, 0], [groove_z, groove_y +mo], [0, groove_y +mo]]);
+			QFlocatingGroove(X=rear_plate[0], Y=groove_y2);
 
 			// vertical mounting plate
 			translate([-rear_plate[0]/2, 0, -rear_plate[2]]) cube(rear_plate);
